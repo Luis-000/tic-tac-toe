@@ -29,6 +29,7 @@ class TicTacToe:
         self.board = [""] * 9
         self.game_active = True
         self.score = {"X": 0, "O": 0}
+        self.last_winner = None
 
         self._build_ui()
         self._center_window()
@@ -40,9 +41,9 @@ class TicTacToe:
 
         self.title_label = Label(
             top, text="TIC TAC TOE",
-            font=("Helvetica", 13, "bold"),
+            font=("Helvetica", 13, "bold"), letter_spacing=4,
             bg=PANEL_COLOR, fg=DIM_COLOR
-            )
+        )
         self.title_label.pack()
 
         # Turn indicator
@@ -176,6 +177,7 @@ class TicTacToe:
         winner_line = self._check_winner()
         if winner_line:
             self.game_active = False
+            self.last_winner = self.current_player
             self._highlight_winner(winner_line)
             self._show_result(f"Player {self.current_player} wins!")
             self.score[self.current_player] += 1
@@ -238,10 +240,12 @@ class TicTacToe:
     def restart(self):
         self.board = [""] * 9
         self.game_active = True
-        self.current_player = "X"
+        self.current_player = self.last_winner if self.last_winner else "X"
+        self.last_winner = None
 
-        self.turn_prefix.config(text="Player",  font=("Helvetica", 15))
-        self.turn_player.config(text="  X", fg=X_COLOR,
+        color = X_COLOR if self.current_player == "X" else O_COLOR
+        self.turn_prefix.config(text="Player", font=("Helvetica", 15))
+        self.turn_player.config(text=f"  {self.current_player}", fg=color,
                                 font=("Helvetica", 15, "bold"))
         self.turn_suffix.config(text="'s turn")
         self._draw_board()
