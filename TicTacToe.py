@@ -41,7 +41,7 @@ class TicTacToe:
 
         self.title_label = Label(
             top, text="TIC TAC TOE",
-            font=("Helvetica", 13, "bold"), letter_spacing=4,
+            font=("Helvetica", 13, "bold"),
             bg=PANEL_COLOR, fg=DIM_COLOR
         )
         self.title_label.pack()
