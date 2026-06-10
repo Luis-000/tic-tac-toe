@@ -54,7 +54,7 @@ python3 TicTacToe.py
 
 ## How to Play
 
-1. Player **X** always goes first
+1. Player **X** goes first. After the first game, winner plays first in the next game.
 2. Click any empty cell to place your symbol
 3. First to get three in a row — horizontally, vertically, or diagonally — wins
 4. If all 9 cells fill with no winner, it's a draw
